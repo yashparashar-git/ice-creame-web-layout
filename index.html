@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTO - Ice Cream & Desserts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* General Body and Font Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #fcf8f3;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: #2c0e0b;
+        }
+
+        nav {
+            background: rgba(75, 26, 22, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        nav h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            padding-right: 60px;
+            margin: 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #fefefe;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f7d794;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #f7d794;
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Hero Section (Video & Quote) --- */
+        .video-box {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .video-box video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .video-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .glass-box {
+            color: #fefefe;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-style: italic;
+            padding: 2rem 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            max-width: 600px; /* Reduced width */
+            padding: 1.5rem 3rem; /* Reduced padding */
+        }
+        
+        /* --- General Section Styles --- */
+        section {
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* --- Treat Section (Circles) --- */
+        .treat {
+            padding: 4rem 5%;
+        }
+
+        .treat-items {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .treat-item {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .treat-item:hover {
+            transform: scale(1.05);
+        }
+
+        .treat-item-icon {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 0 auto 1rem;
+            border: 3px solid rgba(75, 26, 22, 0.9);;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .treat-item-icon-1 { background-image: url(img/t1.webp); }
+        .treat-item-icon-2 { background-image: url(img/t2.webp); }
+        .treat-item-icon-3 { background-image: url(img/t3.webp); }
+        .treat-item-icon-4 { background-image: url(img/t4.webp); }
+        .treat-item-icon-5 { background-image: url(img/t5.webp); }
+        .treat-item-icon-6 { background-image: url(img/t6.webp); }
+        
+        .treat-item:hover .treat-item-icon {
+            border-color: #f7d794;
+        }
+
+        .treat-item h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* --- Product Grid Sections (Box3 & Summer Delights) --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Forced 4-column layout on larger screens */
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            height: 250px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        /* Placeholder images - replace with your own */
+        .img-choco-taco1 { background-image: url(img/w1.jpg); }
+        .img-chocolatechoco-taco2{ background-image: url(img/w2.jpg);}
+        .img-caramelchoco-taco3{ background-image: url(img/w3.jpg);}
+        .img-coldchoco-taco4{ background-image: url(img/w4.jpg);}
+        .img-hazelnut-bar { background-image: url(img/s1.jpg); }
+        .img-strawberry-bar { background-image: url(img/s2.jpg); }
+        .img-belgian-choco { background-image: url(img/s3.jpg); }
+        .img-dark-choco { background-image: url(img/ss4.jpg); }
+        .img-strawberry-pop { background-image: url(img/s2.jpg); }
+        .img-orange-pop { background-image: url(img/v2.jpg); }
+        .img-kala-jamun-pop { background-image: url(img/v3.png); }
+        .img-pink-gauva { background-image: url(img/v1.jpg); }
+
+        .img-choco-taco1:hover { background-image: url(img/h1.webp);transition-duration: 1s; transform: scale(1.2); }
+        .img-chocolatechoco-taco2:hover{ background-image: url(img/h2.webp);transition-duration: 1s; transform: scale(1.2);}
+        .img-caramelchoco-taco3:hover{ background-image: url(img/h3.webp);transition-duration: 1s; transform: scale(1.2);}
+        .img-coldchoco-taco4:hover{ background-image: url(img/h4.jpg);transition-duration: 1s; transform: scale(1.2);}
+        
+        .img-hazelnut-bar:hover { background-image: url(img/sh1.webp);transition-duration: 1s; transform: scale(1.2); }
+        .img-strawberry-bar:hover { background-image: url(img/sh2.webp);transition-duration: 1s; transform: scale(1.2); }
+        .img-belgian-choco:hover { background-image: url(img/sh3.webp);transition-duration: 1s; transform: scale(1.2); }
+        .img-dark-choco:hover { background-image: url(img/sh4.webp);transition-duration: 1s; transform: scale(1.2); }
+
+        .product-content {
+            padding: 1.5rem 1rem;
+        }
+
+        .product-content h4 {
+            margin: 0 0 1rem;
+            line-height: 1.4;
+        }
+        
+        .btn-container {
+            justify-content: center;
+            row-gap: 30px;
+            padding-top: 10px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 5px;
+        }
+
+        .btn-swiggy {
+            background-color: #fc7446;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-swiggy:hover { background-color: #e85c32; }
+
+        .btn-zomato {
+            background-color: #cb202d;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .btn-zomato:hover { background-color: #b01b25; }
+
+        .btn-view {
+            margin-top: 2rem;
+            background-color: #2c0e0b;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-view:hover { background-color: #4b1a16; }
+
+        /* --- Footer --- */
+        .footerpage {
+            background-color: #2c0e0b;
+            color: #f3f3f3;
+            padding: 3rem 5%;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            flex: 1 1 300px;
+        }
+
+        .footer-logo h1 {
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .footer-newsletter {
+            flex: 1 1 300px;
+        }
+
+        .footer-newsletter h3 {
+            font-size: 1.2rem;
+            color: #f7d794;
+            border-bottom: 2px solid #f7d794;
+            padding-bottom: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-box {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-box input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .newsletter-box button {
+            background-color: #f7d794;
+            color: #2c0e0b;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .social-icons {
+            margin-top: 2rem;
+        }
+        
+        .social-icons a {
+            color: #fff;
+            font-size: 2rem;
+            margin-right: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Scroll Animation --- */
+        .scroll-section.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Media Queries for Responsiveness --- */
+        @media (max-width: 1200px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns on larger tablets */
+            }
+        }
+        @media (max-width: 992px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+            }
+        }
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr; /* 1 column on phones */
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>NOTO</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="newabout.html">About Us</a></li>
+            <li><a href="index.html.#shop">Shop</a></li>
+            <li><a href="newcontact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="video-box">
+        <video autoplay muted loop>
+            <source src="252951_medium.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="glass-box">
+            “You can’t buy happiness, but you can buy ice cream – and that’s kind of the same thing.”
+        </div>
+    </div>
+
+    <section class="treat scroll-section">
+        <h2>CHOOSE YOUR TREAT</h2>
+        <div class="treat-items">
+            <div class="treat-item">
+                <div class="treat-item-icon treat-item-icon-1"></div>
+                <h4>WAFFLE ICE CREAM<br>SANDWICH</h4>
+            </div>
+            <div class="treat-item">
+                <div class="treat-item-icon treat-item-icon-2"></div>
+                <h4>ICE CREAM<br>BARS</h4>
+            </div>
+            <div class="treat-item">
+                <div class="treat-item-icon treat-item-icon-3"></div>
+                <h4>POPSICLES</h4>
+            </div>
+            <div class="treat-item">
+                <div class="treat-item-icon treat-item-icon-4"></div>
+                <h4>ICE-CREAM</h4>
+            </div>
+            <div class="treat-item">
+                <div class="treat-item-icon treat-item-icon-5"></div>
+                <h4>MINI-BITES</h4>
+            </div>
+            <div class="treat-item">
+                <div class="treat-item-icon treat-item-icon-6"></div>
+                <h4>ICE CREAM<br>CAKE</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-section" id="shop">
+        <h2>WAFFLE ICE CREAM SANDWICHES</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image img-choco-taco1"></div>
+                <div class="product-content">
+                    <h4>SWEET BERRY CHOCO TACO [4 PIECES] <br>RS.500.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+             <div class="product-card">
+                <div class="product-image img-chocolatechoco-taco2"></div>
+                <div class="product-content">
+                    <h4>RICH CHOCOLATE-CHOCO TACO[4 PIECES] <br>RS.500.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+             <div class="product-card">
+                <div class="product-image img-caramelchoco-taco3"></div>
+                <div class="product-content">
+                    <h4>CRUNCHY CARMEL-CHOCO TACO [4 PIECES] <br>RS.500.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+             <div class="product-card">
+                <div class="product-image img-coldchoco-taco4"></div>
+                <div class="product-content">
+                    <h4>COLD COFFEE-CHOCO TACO [4 PIECES] <br>RS.500.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-section">
+        <h2>SUMMER DELIGHTS</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image img-hazelnut-bar"></div>
+                <div class="product-content">
+                    <h4>HAZELNUT CRUNCH BAR [80ML] <br>RS.155.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image img-strawberry-bar"></div>
+                <div class="product-content">
+                    <h4>STRAWBERRY RASPBERRY [80ML] <br>RS.135.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image img-belgian-choco"></div>
+                <div class="product-content">
+                    <h4>BELGIAN CHOCOLATE [80ML] <br>RS.125.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image img-dark-choco"></div>
+                <div class="product-content">
+                    <h4>DARK CHOCOLATE <br> [80ML] <br>RS.120.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="scroll-section">
+        <h2>VITAMIN C FORTIFIED FRUIT POPSICLES</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image img-strawberry-pop"></div>
+                <div class="product-content">
+                    <h4>STRAWBERRY RASPBERRY <br>RS.125.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image img-orange-pop"></div>
+                <div class="product-content">
+                    <h4>ORANGE POP <br>RS.125.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image img-kala-jamun-pop"></div>
+                <div class="product-content">
+                    <h4>KALA JAMUN POP <br>RS.125.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image img-pink-gauva"></div>
+                <div class="product-content">
+                    <h4>PINK GAUVA CHILLI<br>RS.120.00</h4>
+                    <div class="btn-container">
+                        <a href="https://www.swiggy.com/"><button class="btn btn-swiggy">ORDER ON SWIGGY</button></a>
+                        <a href="https://www.zomato.com/"><button class="btn btn-zomato">ORDER ON ZOMATO</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footerpage scroll-section">
+        <div class="footer">
+            <div class="footer-logo">
+                <h1>NOTO</h1>
+                <span>LOW CALORIE HEALTHY ICE CREAM</span>
+                <p>
+                    Let's be honest - who doesn't want to tuck into sweets and ice creams everyday? 
+                    All too often we feel like if we've had a bite of the dessert we might as well 
+                    have it all - because why not?!?
+                </p>
+            </div>
+            <div class="footer-newsletter">
+                <h3>NEWSLETTER SIGNUP:</h3>
+                <div class="newsletter-box">
+                    <input type="email" placeholder="Enter your Email Address">
+                    <button>GO</button>
+                </div>
+                <p>For any order related queries email us on 
+                    <a href="mailto:order@eatnoto.com">order@eatnoto.com</a>
+                </p>
+                <p>For any job related queries email us on 
+                    <a href="mailto:jobs@eatnoto.com">jobs@eatnoto.com</a>
+                </p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.scroll-section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => {
+                section.classList.add('hidden');
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
